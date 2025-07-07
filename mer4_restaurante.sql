@@ -64,9 +64,9 @@ INSERT INTO Cliente(nombre, telefono, correo) VALUES
 ('Camilo Penagos', '3053358881', 'penagos@gmail.com');
 
 INSERT INTO Empleado(nombre, puesto, salario) VALUES
-('Carlos Ramírez', 'Mesero', 1200000),
+('Carlos Ramirez', 'Mesero', 1200000),
 ('Marta Ruiz', 'Cocinera', 1500000),
-('Pedro López', 'Administrador', 2000000);
+('Pedro Lopez', 'Administrador', 2000000);
 
 INSERT INTO Mesa(numero, capacidad, ubicacion) VALUES
 (1, 4, 'Interior'),
@@ -79,9 +79,9 @@ INSERT INTO Reserva(fecha, hora, id_cliente, id_mesa) VALUES
 ('2025-06-24', '21:00:00', 3, 3);
 
 INSERT INTO Plato(nombre, precio, descripcion) VALUES
-('Pasta Carbonara', 25000, 'Pasta con salsa cremosa y tocino'),
-('Pizza Margarita', 30000, 'Pizza con tomate, albahaca y mozzarella'),
-('Ensalada César', 18000, 'Lechuga, pollo y aderezo César');
+('Pasta Carbonara', 25000, 'Pasta con salsa'),
+('Pizza Margarita', 30000, 'Pizza con tomate, etc'),
+('Ensalada Cesar', 18000, 'Lechuga, pollo etc');
 
 INSERT INTO Pedido(fecha, id_cliente, id_empleado) VALUES
 ('2025-06-22', 1, 1),
