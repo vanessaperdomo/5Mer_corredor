@@ -7,7 +7,7 @@ CREATE TABLE Proveedor (
     id_proveedor INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100),
     contacto  VARCHAR(50),
-    telefono  VARCHAR(20),
+    telefono VARCHAR(20),
     email  VARCHAR(100)
 );
 
