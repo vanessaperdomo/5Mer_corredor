@@ -1,68 +1,67 @@
 -- MER4 - Restaurante
-
 CREATE DATABASE restaurante;
 USE restaurante;
 
 CREATE TABLE Cliente (
-    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100),
-    telefono VARCHAR(20),
-    correo VARCHAR(100)
+  id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+  nombre     VARCHAR(100),
+  telefono   VARCHAR(20),
+  correo     VARCHAR(100)
 );
 
 CREATE TABLE Empleado (
-    id_empleado INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100),
-    puesto VARCHAR(50),
-    salario DECIMAL(10,2)
+  id_empleado INT AUTO_INCREMENT PRIMARY KEY,
+  nombre   VARCHAR(100),
+  puesto   VARCHAR(50),
+  salario  DECIMAL(10,2)
 );
 
 CREATE TABLE Mesa (
-    id_mesa INT AUTO_INCREMENT PRIMARY KEY,
-    numero INT,
-    capacidad INT,
-    ubicacion VARCHAR(50)
+  id_mesa INT AUTO_INCREMENT PRIMARY KEY,
+  numero     INT,
+  capacidad  INT,
+  ubicacion  VARCHAR(50)
 );
 
 CREATE TABLE Reserva (
-    id_reserva INT AUTO_INCREMENT PRIMARY KEY,
-    fecha DATE,
-    hora TIME,
-    id_cliente INT,
-    id_mesa INT,
-    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente),
-    FOREIGN KEY (id_mesa) REFERENCES Mesa(id_mesa)
+  id_reserva INT AUTO_INCREMENT PRIMARY KEY,
+  fecha      DATE,
+  hora       TIME,
+  id_cliente INT,
+  id_mesa    INT,
+  FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente),
+  FOREIGN KEY (id_mesa) REFERENCES Mesa(id_mesa)
 );
 
 CREATE TABLE Plato (
-    id_plato INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100),
-    precio DECIMAL(10,2),
-    descripcion TEXT
+  id_plato INT AUTO_INCREMENT PRIMARY KEY,
+  nombre      VARCHAR(100),
+  precio      DECIMAL(10,2),
+  descripcion TEXT
 );
 
 CREATE TABLE Pedido (
-    id_pedido INT AUTO_INCREMENT PRIMARY KEY,
-    fecha DATE,
-    id_cliente INT,
-    id_empleado INT,
-    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente),
-    FOREIGN KEY (id_empleado) REFERENCES Empleado(id_empleado)
+  id_pedido INT AUTO_INCREMENT PRIMARY KEY,
+  fecha        DATE,
+  id_cliente   INT,
+  id_empleado  INT,
+  FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente),
+  FOREIGN KEY (id_empleado) REFERENCES Empleado(id_empleado)
 );
 
 CREATE TABLE Pedido_Plato (
-    id_pedido INT,
-    id_plato INT,
-    cantidad INT,
-    PRIMARY KEY (id_pedido, id_plato),
-    FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido),
-    FOREIGN KEY (id_plato) REFERENCES Plato(id_plato)
+  id_pedido INT,
+  id_plato  INT,
+  cantidad  INT,
+  PRIMARY KEY (id_pedido, id_plato),
+  FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido),
+  FOREIGN KEY (id_plato)  REFERENCES Plato(id_plato)
 );
 
 INSERT INTO Cliente(nombre, telefono, correo) VALUES
 ('Juan Pérez', '3123456789', 'juan@mail.com'),
 ('Ana Torres', '3009876543', 'ana@mail.com'),
-('Luis Díaz', '3112345678', 'luis@mail.com');
+('Luis Díaz', '3101112223', 'luis@mail.com');
 
 INSERT INTO Empleado(nombre, puesto, salario) VALUES
 ('Carlos Ramírez', 'Mesero', 1200000),
@@ -94,17 +93,18 @@ INSERT INTO Pedido_Plato(id_pedido, id_plato, cantidad) VALUES
 (2, 2, 1),
 (3, 3, 3);
 
-UPDATE Cliente SET telefono = '3100000000' WHERE id_cliente = 1;
-UPDATE Empleado SET salario = 1600000 WHERE id_empleado = 2;
-UPDATE Mesa SET capacidad = 5 WHERE id_mesa = 1;
-UPDATE Plato SET precio = 27000 WHERE id_plato = 1;
-UPDATE Reserva SET hora = '19:30:00' WHERE id_reserva = 1;
+UPDATE Cliente  SET telefono = '3100000000'  WHERE id_cliente = 1;
+UPDATE Empleado SET salario  = salario + 100000 WHERE id_empleado = 2;
+UPDATE Mesa     SET capacidad = 5           WHERE id_mesa = 1;
+UPDATE Plato    SET precio = 27000          WHERE id_plato = 1;
+UPDATE Reserva  SET hora = '19:30:00'       WHERE id_reserva = 1;
 
-DELETE FROM Pedido_Plato WHERE id_pedido = 1 AND id_plato = 1;
-DELETE FROM Reserva WHERE id_reserva = 2;
-DELETE FROM Mesa WHERE id_mesa = 3;
-DELETE FROM Cliente WHERE id_cliente = 3;
+DELETE FROM Pedido_Plato WHERE id_pedido = 3 AND id_plato = 3;
 DELETE FROM Pedido WHERE id_pedido = 3;
+DELETE FROM Reserva WHERE id_reserva = 3;
+DELETE FROM Plato WHERE id_plato = 3;
+DELETE FROM Mesa WHERE id_mesa = 3;
+
 
 SELECT c.nombre, p.fecha FROM Cliente c
 JOIN Pedido p ON c.id_cliente = p.id_cliente;
