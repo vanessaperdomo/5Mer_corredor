@@ -1,6 +1,6 @@
 -- MER3 - Gasolinera
 
-CREATE DATABASE gasolinera;
+CREATE DATABASE  gasolinera;
 USE gasolinera;
 
 CREATE TABLE Cliente (
