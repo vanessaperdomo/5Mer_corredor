@@ -185,88 +185,15 @@ BEGIN
 END//
 DELIMITER ;
 
---
-DELIMITER //
-CREATE FUNCTION fn_total_clientes() RETURNS INT DETERMINISTIC
-BEGIN
-  DECLARE total INT;
-  SELECT COUNT(*) INTO total FROM Cliente;
-  RETURN total;
-END;//
+ALTER TABLE Mesa ADD COLUMN decoracion VARCHAR(50);
+ALTER TABLE Mesa DROP COLUMN decoracion;
 
-CREATE FUNCTION fn_total_pedidos() RETURNS INT DETERMINISTIC
-BEGIN
-  DECLARE total INT;
-  SELECT COUNT(*) INTO total FROM Pedido;
-  RETURN total;
-END;//
-
-CREATE FUNCTION fn_nombre_plato(pid INT) RETURNS VARCHAR(100) DETERMINISTIC
-BEGIN
-  DECLARE nombre VARCHAR(100);
-  SELECT nombre INTO nombre FROM Plato WHERE id_plato = pid;
-  RETURN nombre;
-END;//
-
-CREATE FUNCTION fn_salario_empleado(pid INT) RETURNS DECIMAL(10,2) DETERMINISTIC
-BEGIN
-  DECLARE salario DECIMAL(10,2);
-  SELECT salario INTO salario FROM Empleado WHERE id_empleado = pid;
-  RETURN salario;
-END;//
-
-CREATE FUNCTION fn_capacidad_mesa(pid INT) RETURNS INT DETERMINISTIC
-BEGIN
-  DECLARE capacidad INT;
-  SELECT capacidad INTO capacidad FROM Mesa WHERE id_mesa = pid;
-  RETURN capacidad;
-END;//
-
-CREATE FUNCTION fn_total_platos() RETURNS INT DETERMINISTIC
-BEGIN
-  DECLARE total INT;
-  SELECT COUNT(*) INTO total FROM Plato;
-  RETURN total;
-END;//
-
-CREATE FUNCTION fn_precio_plato(pid INT) RETURNS DECIMAL(10,2) DETERMINISTIC
-BEGIN
-  DECLARE precio DECIMAL(10,2);
-  SELECT precio INTO precio FROM Plato WHERE id_plato = pid;
-  RETURN precio;
-END;//
-
-CREATE FUNCTION fn_total_reservas() RETURNS INT DETERMINISTIC
-BEGIN
-  DECLARE total INT;
-  SELECT COUNT(*) INTO total FROM Reserva;
-  RETURN total;
-END;//
-
-CREATE FUNCTION fn_turno_reserva(pid INT) RETURNS TIME DETERMINISTIC
-BEGIN
-  DECLARE hora TIME;
-  SELECT hora INTO hora FROM Reserva WHERE id_reserva = pid;
-  RETURN hora;
-END;//
-
-CREATE FUNCTION fn_pedido_cliente(pid INT) RETURNS INT DETERMINISTIC
-BEGIN
-  DECLARE cid INT;
-  SELECT id_cliente INTO cid FROM Pedido WHERE id_pedido = pid;
-  RETURN cid;
-END;//
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE sp_insertar_plato(
-  IN pnombre VARCHAR(100),
-  IN pprecio DECIMAL(10,2),
-  IN pdescripcion TEXT
-)
-BEGIN
-  INSERT INTO Plato(nombre, precio, descripcion) VALUES(pnombre, pprecio, pdescripcion);
-END;//
-DELIMITER ;
+DROP TABLE Pedido_Plato;
+DROP TABLE Pedido;
+DROP TABLE Reserva;
+DROP TABLE Plato;
+DROP TABLE Mesa;
+DROP TABLE Empleado;
+DROP TABLE Cliente;
 
 DROP DATABASE restaurante;
