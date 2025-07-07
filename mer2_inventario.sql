@@ -1,6 +1,5 @@
 -- MER 2 - Inventario
 
-DROP DATABASE inventario;
 CREATE DATABASE inventario;
 USE inventario;
 
@@ -67,27 +66,27 @@ CREATE TABLE Detalle_Movimiento (
 
 INSERT INTO Proveedor(nombre, contacto, telefono, email) VALUES
  ('Distribuidora A', 'Laura Rivas',  '3101234567', 'a@mail.com'),
- ('Mayorista B',     'Carlos Méndez','3117654321', 'b@mail.com'),
- ('Importadora C',   'Andrés Torres','3129988776', 'c@mail.com'),
- ('Proveedor_aux',   'Eliminar',     '3999999999', 'aux@mail.com');
+ ('Mayorista B',     'Carlos Mendez','3117654321', 'b@mail.com'),
+ ('Importadora C',   'Andres Torres','3129988776', 'c@mail.com'),
+ ('Proveedor_aux',   'Jose Perez',     '3999999999', 'aux@mail.com');
 
 INSERT INTO Categoria(nombre, descripcion) VALUES
  ('Electrónica', 'Dispositivos electrónicos'),
  ('Papelería',    'Útiles de oficina'),
  ('Aseo',         'Productos de limpieza'),
- ('Cat_aux',      'Eliminar');
+ ('Cat_aux',      'Productos capilares');
 
 INSERT INTO Producto(nombre, descripcion, precio, stock, id_categoria, marca) VALUES
- ('Laptop HP',   'Portátil 15"',     2500000.00, 10, 1, 'HP'),
- ('Resma Papel', 'Carta 500 hojas',     15000.00, 60, 2, 'Norma'),
- ('Detergente',  'Líquido universal',    8000.00, 25, 3, 'Ariel'),
- ('Prod_aux',    'Eliminar',            9999.00,  5, 4, 'X');
+ ('Laptop HP',   'Portátil 15"',  2500000.00, 10, 1, 'HP'),
+ ('Resma Papel', 'Carta 500 hojas',  15000.00, 60, 2, 'Norma'),
+ ('Detergente',  'Líquido universal', 8000.00, 25, 3, 'Ariel'),
+ ('Prod_aux', 'shampo',   9999.00,  5, 4, 'X');
 
 INSERT INTO Bodega(nombre, ubicacion, capacidad) VALUES
  ('Central', 'Zona Centro', 100),
- ('Norte',   'Parque Industrial', 150),
- ('Sur',     'Zona Franca', 200),
- ('Bodega_aux', 'Eliminar', 10);
+ ('Norte',  'Parque Industrial', 150),
+ ('Sur',  'Zona Franca', 200),
+ ('Bodega_aux', 'Zona verde', 10);
 
 INSERT INTO Movimiento(tipo, fecha, id_bodega, usuario) VALUES
  ('Entrada','2025-06-01',1,'admin'),
@@ -99,7 +98,7 @@ INSERT INTO Producto_Proveedor(id_producto, id_proveedor, precio_compra) VALUES
  (1,1,2400000.00),(2,2,12000.00),(3,3,7000.00),(4,4,500.00);
 
 INSERT INTO Detalle_Movimiento(id_movimiento, id_producto, cantidad, observaciones) VALUES
- (1,1,5,'ok'),(2,2,10,'ok'),(3,3,7,'ok'),(4,4,1,'aux');
+ (1,1,5,'ok'),(2,2,10,'ok'),(3,3,7,'ok'),(4,4,1,'ok');
 
 
 UPDATE Producto   SET precio = 2600000.00 WHERE id_producto = 1;
