@@ -59,9 +59,9 @@ CREATE TABLE Pedido_Plato (
 );
 
 INSERT INTO Cliente(nombre, telefono, correo) VALUES
-('Juan Pérez', '3123456789', 'juan@mail.com'),
-('Ana Torres', '3009876543', 'ana@mail.com'),
-('Luis Díaz', '3101112223', 'luis@mail.com');
+('Juan Perez', '3123456789', 'juan@gmail.com'),
+('Ana Rivera', '3144214909', 'ana@gmail.com'),
+('Camilo Penagos', '3053358881', 'penagos@gmail.com');
 
 INSERT INTO Empleado(nombre, puesto, salario) VALUES
 ('Carlos Ramírez', 'Mesero', 1200000),
