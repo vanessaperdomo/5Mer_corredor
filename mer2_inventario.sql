@@ -32,7 +32,7 @@ CREATE TABLE Bodega (
     id_bodega  INT AUTO_INCREMENT PRIMARY KEY,
     nombre      VARCHAR(100),
     ubicacion   VARCHAR(100),
-    capacidad   INT DEFAULT 0
+    capacidad   INT 
 );
 
 CREATE TABLE Movimiento (
@@ -65,28 +65,28 @@ CREATE TABLE Detalle_Movimiento (
 
 
 INSERT INTO Proveedor(nombre, contacto, telefono, email) VALUES
- ('Distribuidora A', 'Laura Rivas',  '3101234567', 'a@mail.com'),
- ('Mayorista B',     'Carlos Mendez','3117654321', 'b@mail.com'),
- ('Importadora C',   'Andres Torres','3129988776', 'c@mail.com'),
- ('Proveedor_aux',   'Jose Perez',     '3999999999', 'aux@mail.com');
+ ('Distribuidora A', 'Laura Rivas',  '3101234567', 'a@gmail.com'),
+ ('Mayorista B',     'Carlos Mendez','3117654321', 'b@gmail.com'),
+ ('Importadora C',   'Andres Torres','3129988776', 'c@gmail.com'),
+ ('Proveedor_aux',   'Jose Perez',     '3999999999', 'pro@gmail.com');
 
 INSERT INTO Categoria(nombre, descripcion) VALUES
- ('Electrónica', 'Dispositivos electrónicos'),
- ('Papelería',    'Útiles de oficina'),
+ ('Electronica', 'Dispositivos electronicos'),
+ ('Papeleria',    'Utiles de oficina'),
  ('Aseo',         'Productos de limpieza'),
  ('Cat_aux',      'Productos capilares');
 
 INSERT INTO Producto(nombre, descripcion, precio, stock, id_categoria, marca) VALUES
- ('Laptop HP',   'Portátil 15"',  2500000.00, 10, 1, 'HP'),
+ ('Laptop HP',   'Portatil 15"',  2500000.00, 10, 1, 'HP'),
  ('Resma Papel', 'Carta 500 hojas',  15000.00, 60, 2, 'Norma'),
- ('Detergente',  'Líquido universal', 8000.00, 25, 3, 'Ariel'),
- ('Prod_aux', 'shampo',   9999.00,  5, 4, 'X');
+ ('Detergente',  'Liquido universal', 8000.00, 25, 3, 'Ariel'),
+ ('Shampos', 'Shampo verde',   9999.00,  5, 4, 'Milagros');
 
 INSERT INTO Bodega(nombre, ubicacion, capacidad) VALUES
  ('Central', 'Zona Centro', 100),
  ('Norte',  'Parque Industrial', 150),
  ('Sur',  'Zona Franca', 200),
- ('Bodega_aux', 'Zona verde', 10);
+ ('Oeste', 'Avenida rosa', 10);
 
 INSERT INTO Movimiento(tipo, fecha, id_bodega, usuario) VALUES
  ('Entrada','2025-06-01',1,'admin'),
@@ -95,27 +95,57 @@ INSERT INTO Movimiento(tipo, fecha, id_bodega, usuario) VALUES
  ('Mov_aux','2025-06-04',4,'admin');
 
 INSERT INTO Producto_Proveedor(id_producto, id_proveedor, precio_compra) VALUES
- (1,1,2400000.00),(2,2,12000.00),(3,3,7000.00),(4,4,500.00);
+ (1,1,2400000.00),
+ (2,2,12000.00),
+ (3,3,7000.00),
+ (4,4,500.00);
 
 INSERT INTO Detalle_Movimiento(id_movimiento, id_producto, cantidad, observaciones) VALUES
- (1,1,5,'ok'),(2,2,10,'ok'),(3,3,7,'ok'),(4,4,1,'ok');
+ (1,1,5,'ok'),
+ (2,2,10,'ok'),
+ (3,3,7,'ok'),
+ (4,4,1,'ok');
 
+UPDATE Producto   
+SET precio = 2600000.00 
+WHERE id_producto = 1;
 
-UPDATE Producto   SET precio = 2600000.00 WHERE id_producto = 1;
-UPDATE Producto   SET stock  = stock + 5   WHERE id_producto = 2;
-UPDATE Proveedor  SET telefono = '3201112233' WHERE id_proveedor = 2;
-UPDATE Bodega     SET capacidad = 180 WHERE id_bodega = 3;
-UPDATE Categoria  SET nombre = 'Tecnología' WHERE id_categoria = 1;
+UPDATE Producto   
+SET stock  = stock + 5   
+WHERE id_producto = 2;
 
+UPDATE Proveedor  
+SET telefono = '3201112233' 
+WHERE id_proveedor = 2;
 
-DELETE FROM Detalle_Movimiento WHERE id_movimiento = 4 AND id_producto = 4;
-DELETE FROM Producto_Proveedor  WHERE id_producto   = 4 AND id_proveedor = 4;
-DELETE FROM Movimiento          WHERE id_movimiento = 4;
-DELETE FROM Producto            WHERE id_producto   = 4;
-DELETE FROM Proveedor           WHERE id_proveedor  = 4;
-DELETE FROM Bodega              WHERE id_bodega     = 4;
-DELETE FROM Categoria           WHERE id_categoria  = 4;
+UPDATE Bodega     
+SET capacidad = 180 
+WHERE id_bodega = 3;
 
+UPDATE Categoria  
+SET nombre = 'Tecnologia' 
+WHERE id_categoria = 1;
+
+DELETE FROM Detalle_Movimiento 
+WHERE id_movimiento = 4 AND id_producto = 4;
+
+DELETE FROM Producto_Proveedor  
+WHERE id_producto   = 4 AND id_proveedor = 4;
+
+DELETE FROM Movimiento  
+WHERE id_movimiento = 4;
+
+DELETE FROM Producto  
+WHERE id_producto   = 4;
+
+DELETE FROM Proveedor           
+WHERE id_proveedor  = 4;
+
+DELETE FROM Bodega    
+WHERE id_bodega = 4;
+
+DELETE FROM Categoria      
+WHERE id_categoria  = 4;
 
 DELIMITER //
 CREATE FUNCTION fn_total_productos() RETURNS INT DETERMINISTIC
@@ -204,7 +234,6 @@ BEGIN
 END//
 DELIMITER ;
 
-
 SELECT p.nombre AS producto, c.nombre AS categoria
 FROM Producto p
 JOIN Categoria c ON p.id_categoria = c.id_categoria;
@@ -212,7 +241,6 @@ JOIN Categoria c ON p.id_categoria = c.id_categoria;
 SELECT m.tipo, m.fecha, b.nombre AS bodega
 FROM Movimiento m
 JOIN Bodega b ON m.id_bodega = b.id_bodega;
-
 
 SELECT pr.nombre AS producto, pv.nombre AS proveedor, pp.precio_compra
 FROM Producto_Proveedor pp
@@ -224,13 +252,11 @@ FROM Detalle_Movimiento dm
 JOIN Producto pr ON dm.id_producto = pr.id_producto
 GROUP BY pr.nombre;
 
-
 SELECT DISTINCT usuario FROM Movimiento;
 
 SELECT nombre, stock
 FROM Producto
 WHERE stock > (SELECT AVG(stock) FROM Producto);
-
 
 SELECT c.nombre
 FROM Categoria c
