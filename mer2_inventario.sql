@@ -5,15 +5,15 @@ USE inventario;
 
 CREATE TABLE Proveedor (
     id_proveedor INT AUTO_INCREMENT PRIMARY KEY,
-    nombre        VARCHAR(100),
-    contacto      VARCHAR(50),
-    telefono      VARCHAR(20),
-    email         VARCHAR(100)
+    nombre VARCHAR(100),
+    contacto  VARCHAR(50),
+    telefono  VARCHAR(20),
+    email  VARCHAR(100)
 );
 
 CREATE TABLE Categoria (
     id_categoria INT AUTO_INCREMENT PRIMARY KEY,
-    nombre       VARCHAR(50),
+    nombre  VARCHAR(50),
     descripcion  TEXT
 );
 
