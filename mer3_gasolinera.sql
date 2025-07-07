@@ -56,8 +56,8 @@ CREATE TABLE Empleado_Turno (
 );
 
 INSERT INTO Cliente(nombre, cedula, telefono) VALUES
-('Laura Gómez', '12345678', '3101234567'),
-('Pedro Ruiz', '87654321', '3117654321'),
+('Laura Gomez', '12345678', '3101234567'),
+('Jhoan Penagos', '87654321', '3117654321'),
 ('Ana Torres', '11223344', '3129988776');
 
 INSERT INTO Empleado(nombre, cargo, telefono) VALUES
@@ -73,7 +73,7 @@ INSERT INTO Combustible(tipo, precio, cantidad) VALUES
 INSERT INTO Turno(dia, hora_inicio, hora_fin) VALUES
 ('Lunes', '06:00:00', '14:00:00'),
 ('Martes', '14:00:00', '22:00:00'),
-('Miércoles', '22:00:00', '06:00:00');
+('Miercoles', '22:00:00', '06:00:00');
 
 INSERT INTO Venta(fecha, total, id_combustible) VALUES
 ('2025-06-01', 50000.00, 1),
@@ -96,7 +96,8 @@ UPDATE Empleado SET cargo = 'Gerente' WHERE id_empleado = 2;
 UPDATE Turno SET dia = 'Jueves' WHERE id_turno = 2;
 UPDATE Venta SET total = 55000.00 WHERE id_venta = 1;
 
-DELETE FROM Venta_Cliente WHERE id_cliente = 3 AND id_venta = 3;
+DELETE FROM Venta_Cliente 
+WHERE id_cliente = 3 AND id_venta = 3;
 DELETE FROM Empleado_Turno WHERE id_empleado = 3 AND id_turno = 3;
 DELETE FROM Venta WHERE id_venta = 3;
 DELETE FROM Empleado WHERE id_empleado = 3;
@@ -237,12 +238,6 @@ ALTER TABLE Cliente
 ADD COLUMN correo VARCHAR(100);
 
 ALTER TABLE Cliente
-DROP COLUMN correo;
-
-ALTER TABLE Empleado
-ADD COLUMN correo VARCHAR(100);
-
-ALTER TABLE Empleado
 DROP COLUMN correo;
 
 DROP TABLE Empleado_Turno;
