@@ -95,11 +95,20 @@ UPDATE Cita SET hora = '11:00:00' WHERE id_cita = 1;
 UPDATE Sala SET tipo = 'Terapia' WHERE id_sala = 2;
 UPDATE Turno SET dia = 'Jueves' WHERE id_turno = 2;
 
-DELETE FROM Cita_Sala WHERE id_cita = 1 AND id_sala = 1;
-DELETE FROM Doctor_Turno WHERE id_doctor = 1 AND id_turno = 1;
-DELETE FROM Cita WHERE id_cita = 3;
-DELETE FROM Paciente WHERE id_paciente = 3;
-DELETE FROM Doctor WHERE id_doctor = 3;
+DELETE FROM Cita_Sala      
+WHERE id_cita = 3 AND id_sala = 3;
+
+DELETE FROM Doctor_Turno   
+WHERE id_doctor = 3 AND id_turno = 3;
+
+DELETE FROM Cita          
+WHERE id_cita = 3;
+
+DELETE FROM Doctor         
+WHERE id_doctor = 3;
+
+DELETE FROM Paciente       
+WHERE id_paciente = 3;
 
 SELECT p.nombre, c.fecha, c.hora
 FROM Paciente p
@@ -228,5 +237,16 @@ BEGIN
 END;//
 
 DELIMITER ;
+
+ALTER TABLE Doctor ADD COLUMN correo VARCHAR(20);
+ALTER TABLE Doctor DROP COLUMN correo;
+
+DROP TABLE Cita_Sala;
+DROP TABLE Doctor_Turno;
+DROP TABLE Turno;
+DROP TABLE Sala;
+DROP TABLE Cita;
+DROP TABLE Doctor;
+DROP TABLE Paciente;
 
 DROP DATABASE hospital;
