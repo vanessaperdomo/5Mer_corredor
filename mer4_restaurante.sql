@@ -105,29 +105,41 @@ DELETE FROM Reserva WHERE id_reserva = 3;
 DELETE FROM Plato WHERE id_plato = 3;
 DELETE FROM Mesa WHERE id_mesa = 3;
 
-
-SELECT c.nombre, p.fecha FROM Cliente c
+SELECT c.nombre, p.fecha
+FROM Cliente c
 JOIN Pedido p ON c.id_cliente = p.id_cliente;
 
-SELECT e.nombre, p.id_pedido FROM Empleado e
+SELECT e.nombre AS empleado, p.id_pedido
+FROM Empleado e
 JOIN Pedido p ON e.id_empleado = p.id_empleado;
 
-SELECT r.fecha, m.numero FROM Reserva r
+SELECT r.fecha, m.numero
+FROM Reserva r
 JOIN Mesa m ON r.id_mesa = m.id_mesa;
 
-SELECT pl.nombre, pp.cantidad FROM Plato pl
+SELECT pl.nombre, pp.cantidad
+FROM Plato pl
 JOIN Pedido_Plato pp ON pl.id_plato = pp.id_plato;
 
 SELECT m.numero, COUNT(r.id_reserva) AS reservas
 FROM Mesa m
-JOIN Reserva r ON m.id_mesa = r.id_mesa
+LEFT JOIN Reserva r ON m.id_mesa = r.id_mesa
 GROUP BY m.numero;
 
-SELECT nombre FROM Cliente WHERE id_cliente = (SELECT MAX(id_cliente) FROM Cliente);
-SELECT precio FROM Plato WHERE id_plato = (SELECT id_plato FROM Pedido_Plato WHERE id_pedido = 2);
-SELECT nombre FROM Mesa WHERE id_mesa = (SELECT id_mesa FROM Reserva GROUP BY id_mesa ORDER BY COUNT(*) DESC LIMIT 1);
-SELECT nombre FROM Empleado WHERE id_empleado = (SELECT MAX(id_empleado) FROM Empleado);
-SELECT nombre FROM Plato WHERE id_plato IN (SELECT id_plato FROM Pedido_Plato WHERE cantidad > 2);
+SELECT nombre FROM Cliente
+WHERE id_cliente = (SELECT MAX(id_cliente) FROM Cliente);
+
+SELECT precio FROM Plato
+WHERE id_plato = (SELECT id_plato FROM Pedido_Plato WHERE id_pedido = 1);
+
+SELECT numero FROM Mesa
+WHERE id_mesa = (SELECT id_mesa FROM Reserva GROUP BY id_mesa ORDER BY COUNT(*) DESC LIMIT 1);
+
+SELECT nombre FROM Empleado
+WHERE id_empleado = (SELECT MAX(id_empleado) FROM Empleado);
+
+SELECT nombre FROM Plato
+WHERE id_plato IN (SELECT id_plato FROM Pedido_Plato WHERE cantidad > 1);
 
 DELIMITER //
 CREATE FUNCTION fn_total_clientes() RETURNS INT DETERMINISTIC
