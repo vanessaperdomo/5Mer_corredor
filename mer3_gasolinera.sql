@@ -96,8 +96,8 @@ UPDATE Empleado SET cargo = 'Gerente' WHERE id_empleado = 2;
 UPDATE Turno SET dia = 'Jueves' WHERE id_turno = 2;
 UPDATE Venta SET total = 55000.00 WHERE id_venta = 1;
 
-DELETE FROM Venta_Cliente WHERE id_cliente = 1 AND id_venta = 1;
-DELETE FROM Empleado_Turno WHERE id_empleado = 1 AND id_turno = 1;
+DELETE FROM Venta_Cliente WHERE id_cliente = 3 AND id_venta = 3;
+DELETE FROM Empleado_Turno WHERE id_empleado = 3 AND id_turno = 3;
 DELETE FROM Venta WHERE id_venta = 3;
 DELETE FROM Empleado WHERE id_empleado = 3;
 DELETE FROM Cliente WHERE id_cliente = 3;
@@ -232,5 +232,25 @@ BEGIN
 END;//
 
 DELIMITER ;
+
+ALTER TABLE Cliente
+ADD COLUMN correo VARCHAR(100);
+
+ALTER TABLE Cliente
+DROP COLUMN correo;
+
+ALTER TABLE Empleado
+ADD COLUMN correo VARCHAR(100);
+
+ALTER TABLE Empleado
+DROP COLUMN correo;
+
+DROP TABLE Empleado_Turno;
+DROP TABLE Venta_Cliente;
+DROP TABLE Venta;
+DROP TABLE Turno;
+DROP TABLE Combustible;
+DROP TABLE Empleado;
+DROP TABLE Cliente;
 
 DROP DATABASE gasolinera;
